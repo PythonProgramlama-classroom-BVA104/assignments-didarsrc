@@ -1,58 +1,50 @@
-from entities import * # entities.py dosyasından tüm sınıfları içe aktarıyoruz
+from oyun_modulu import * #oyun_modulu.py dosyasındaki fonksiyonları kullanmak için içe aktarılır
 
 
-araclar = [ # araç listesi oluşturuyoruz ve her araç türünden birer örnek ekliyoruz
-    Binek("34ABC01", "Toyota", "Corolla"),
-    Ticari("34XYZ22", "Ford", "Transit"),
-    Lux("34LUX99", "BMW", "X5")
-]
+while True: #kullanıcı çıkış yapana kadar oyun döngüsü devam eder
 
-
-toplam_gelir = 0 # toplam geliri takip etmek için bir değişken oluşturuyoruz
-
-
-while True: #kullanıcıdan seçim yapmasını istiyoruz
-
-    print("\n--- ARAÇ KİRALAMA SİSTEMİ ---")
-    print("1- Kiralanabilir araçları listele")
-    print("2- Araç kirala")
-    print("3- Toplam günlük gelir")
+    print("\n--- ŞANS OYUNLARI ---")
+    print("1- Sayı Tahmin")
+    print("2- Yazı Tura")
+    print("3- Skorlar")
     print("4- Çıkış")
 
-    secim = input("Seçim:") 
+    secim = input("Seç:")
 
-    if secim == "1": 
 
-        for arac in araclar:
-            if arac.musait:
-                arac.bilgileri_goster()
-                print("Ücret:", arac.gunluk_ucret())
 
-    elif secim == "2":
+    if secim == "1": #kullanıcı sayı tahmin oyununu seçerse
 
-        plaka = input("Plaka gir:")
+        ad = input("Adın:")
 
-        bulundu = False
+        puan = sayi_tahmin()
 
-        for arac in araclar: # araç listesinde kullanıcı tarafından girilen plakaya sahip aracı bulmaya çalışıyoruz
+        skor_kaydet(ad,"Sayi Tahmin",puan)
 
-            if arac.plaka == plaka:
 
-                arac.kirala()
-                toplam_gelir += arac.gunluk_ucret()
-                bulundu = True
 
-        if bulundu == False:
-            print("Araç bulunamadı")
+    elif secim == "2": #kullanıcı yazı tura oyununu seçerse
 
-    elif secim == "3":
+        ad = input("Adın:")
 
-        print("Toplam gelir:", toplam_gelir, "TL")
+        puan = yazi_tura()
 
-    elif secim == "4":
+        skor_kaydet(ad,"Yazi Tura",puan)
 
-        print("Çıkış yapılıyor...")
+
+
+    elif secim == "3": #kullanıcı skorları görmek isterse
+
+        skor_goster()
+
+
+
+    elif secim == "4": #kullanıcı çıkış yapmak isterse
+
+        print("Çıkılıyor")
         break
 
+
     else:
-        print("Hatalı seçim")
+
+        print("Hatalı giriş")
